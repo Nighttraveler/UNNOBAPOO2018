@@ -10,6 +10,10 @@ public class Impacto {
 		this.objetivo = objetivo;
 	}
 
+	public Impacto(int peso) {
+		this.peso = peso;
+	}
+
 	public int getPeso() {
 		return peso;
 	}

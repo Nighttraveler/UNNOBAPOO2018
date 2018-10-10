@@ -5,7 +5,12 @@ public class Convocatoria {
 	private String nombre;
 	private String descripcion;
 
-	public String getDescripcion() {
+    public Convocatoria(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
 		return descripcion;
 	}
 
@@ -16,6 +21,7 @@ public class Convocatoria {
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

@@ -5,6 +5,11 @@ public class LineaEstrategica {
 	private String nombre;
 	private String descripcion;
 
+	public LineaEstrategica(String nombre, String descripcion) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -16,6 +21,7 @@ public class LineaEstrategica {
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

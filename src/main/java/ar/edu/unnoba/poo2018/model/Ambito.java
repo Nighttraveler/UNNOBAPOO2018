@@ -5,6 +5,11 @@ public class Ambito {
 	private String nombre;
 	private String descripcion;
 
+	public Ambito(String nombre, String descripcion) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}

@@ -16,8 +16,24 @@ public abstract class Actividad {
 	private Convocatoria convocatoria;
 	private LineaEstrategica linea;
 	private Ambito ambito;
-	
 	private List<Usuario> responsables = new ArrayList<>();
+
+	//----------------------------------------------- Constructores
+
+
+    public Actividad(String nombre, Date fechaInicio, Date fechaFin, String resolucion,
+                     String expediente, Convocatoria convocatoria,
+                     LineaEstrategica linea, Ambito ambito, List<Usuario> responsables) {
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.resolucion = resolucion;
+        this.expediente = expediente;
+        this.convocatoria = convocatoria;
+        this.linea = linea;
+        this.ambito = ambito;
+        this.responsables = responsables;
+    }
 
 	// ---------------------------------------------- Getters & Setters
 
@@ -88,5 +104,7 @@ public abstract class Actividad {
 	}
 	
 	public abstract List<Impacto> getImpactos();
+
+	public abstract double getPeso();
 	 
 }
