@@ -12,8 +12,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
-    private static final String DEFAULT_USER = "fer@mail.com";
-    private static final String DEFAULT_PASSWORD = "1234";
+    private static final String DEFAULT_USER = "poo2018@unnoba.edu.ar";
+    private static final String DEFAULT_PASSWORD = "unnoba2018!";
 //TODO: acomodar el valor de las variables de arriba
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
