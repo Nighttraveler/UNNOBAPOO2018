@@ -1,12 +1,14 @@
 package ar.edu.unnoba.poo2018.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
+import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategySimple;
+
+import java.util.*;
 
 public class ActividadSimple extends Actividad {
 
 	private List<Impacto> impactos = new ArrayList<Impacto>();
+	private ObjetivoPesoStrategy objetivoPesoStrategy = new ObjetivoPesoStrategySimple();
 
     public ActividadSimple(String nombre, Date fechaInicio, Date fechaFin, String resolucion, String expediente,
                            Convocatoria convocatoria, LineaEstrategica linea,
@@ -34,12 +36,16 @@ public class ActividadSimple extends Actividad {
 	}
 
     /**
-     * @return el promedio del peso de los impactos
+     * @return un Map<Objetivo, peso>
      */
-	public double getPeso(){
-        double pesos = this.impactos.stream().mapToInt(Impacto::getPeso).sum();
-        double promedio = pesos/this.impactos.size();
-        return promedio;
+	public Map<Objetivo, Integer> getPeso(){
+        return objetivoPesoStrategy.calcularPeso(this.impactos);
     }
+
+    @Override
+    public Map<Objetivo, Integer> getPeso(Objetivo objetivo) {
+        return objetivoPesoStrategy.calcularPeso(this.impactos, objetivo);
+    }
+
 
 }

@@ -1,8 +1,11 @@
 package ar.edu.unnoba.poo2018.model;
 
+import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Actividad {
 
@@ -17,6 +20,7 @@ public abstract class Actividad {
 	private LineaEstrategica linea;
 	private Ambito ambito;
 	private List<Usuario> responsables = new ArrayList<>();
+	private ObjetivoPesoStrategy objetivoPesoStrategy;
 
 	//----------------------------------------------- Constructores
 
@@ -105,6 +109,7 @@ public abstract class Actividad {
 	
 	public abstract List<Impacto> getImpactos();
 
-	public abstract double getPeso();
+	public abstract Map<Objetivo, Integer> getPeso();
+	public abstract Map<Objetivo, Integer> getPeso(Objetivo objetivo);
 	 
 }
