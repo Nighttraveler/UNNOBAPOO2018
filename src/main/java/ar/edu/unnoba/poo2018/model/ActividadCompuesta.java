@@ -1,12 +1,15 @@
 package ar.edu.unnoba.poo2018.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
+import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategyCompuesto;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ActividadCompuesta extends Actividad {
 
 	private List<Actividad> actividades = new ArrayList<Actividad>();
+	private ObjetivoPesoStrategy objetivoPesoStrategy = new ObjetivoPesoStrategyCompuesto();
 
 	public ActividadCompuesta(String nombre, Date fechaInicio, Date fechaFin, String resolucion,
                               String expediente, Convocatoria convocatoria, LineaEstrategica linea,
@@ -46,18 +49,34 @@ public class ActividadCompuesta extends Actividad {
     }
 
     /**
-     * @return el promedio de la sumatoria de promedios pertenecientes
-     *          a la actividad compuesta
+     * @return Map<Objetivo, promedio> con el promedio para dicho objetivo de la instancia actividad actual
      */
     @Override
-    public double getPeso() {
-        double pesos = 0;
-        for (Actividad actividad: this.actividades){
-            pesos += actividad.getPeso();
+    public Map<Objetivo, Integer> getPeso() {
+        Map<Objetivo, Integer> objetivoPromedio =  new HashMap<>();
+        List<Impacto> impactos =  this.getImpactos();
+        for (Impacto impacto: impactos){
+            Objetivo objetivoImpacto = impacto.getObjetivo();
+
+            if (!objetivoPromedio.containsKey( objetivoImpacto )){
+                // obtener todos los impactos con el que tengan el mismo objetivo
+                List<Impacto> ImpactosMismoObjetivo = impactos.stream()
+						.filter(impact-> impact.getObjetivo()==objetivoImpacto
+                ).collect(Collectors.toList());
+
+				objetivoPromedio.putAll( objetivoPesoStrategy.calcularPeso(ImpactosMismoObjetivo));
+				//TODO filtrar los impactos con el objetivo ya analizado
+				impactos = impactos.stream()
+						.filter( impc -> impc.getObjetivo()!=objetivoImpacto )
+						.collect(Collectors.toList());
+            }
         }
-        double promedio = pesos / this.actividades.size();
-        return promedio;
+        return objetivoPromedio;
     }
 
+	@Override
+	public Map<Objetivo, Integer> getPeso(Objetivo objetivo) {
+		return objetivoPesoStrategy.calcularPeso(this.getImpactos(), objetivo);
+	}
 
 }
