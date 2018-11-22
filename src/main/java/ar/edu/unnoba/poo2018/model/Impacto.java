@@ -1,6 +1,11 @@
 package ar.edu.unnoba.poo2018.model;
 
-public class Impacto {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Impactos")
+public class Impacto extends AbstractEntity{
 
 	private Objetivo objetivo;
 	private int peso;
@@ -9,6 +14,8 @@ public class Impacto {
 		this.peso = peso;
 		this.objetivo = objetivo;
 	}
+
+	public Impacto(){}
 
 	public Impacto(int peso) {
 		this.peso = peso;

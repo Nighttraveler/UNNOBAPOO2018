@@ -3,12 +3,16 @@ package ar.edu.unnoba.poo2018.model;
 import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
 import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategySimple;
 
+import javax.persistence.*;
 import java.util.*;
 
-public class ActividadSimple extends Actividad {
+@Entity()
+@DiscriminatorValue("Actividad_Simple")
+public class ActividadSimple extends AbstractActividad {
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "actividad")
 	private List<Impacto> impactos = new ArrayList<Impacto>();
-	private ObjetivoPesoStrategy objetivoPesoStrategy = new ObjetivoPesoStrategySimple();
 
     public ActividadSimple(String nombre, Date fechaInicio, Date fechaFin, String resolucion, String expediente,
                            Convocatoria convocatoria, LineaEstrategica linea,
@@ -23,6 +27,8 @@ public class ActividadSimple extends Actividad {
         this.impactos = impactos;
     }
 
+    public ActividadSimple(){}
+
     public void addImpacto(Impacto impacto){
 		this.impactos.add(impacto);
 	}
@@ -35,9 +41,8 @@ public class ActividadSimple extends Actividad {
 		return impactos;
 	}
 
-    /**
-     * @return un Map<Objetivo, peso>
-     */
+/*
+
 	public Map<Objetivo, Integer> getPeso(){
         return objetivoPesoStrategy.calcularPeso(this.impactos);
     }
@@ -45,7 +50,7 @@ public class ActividadSimple extends Actividad {
     @Override
     public Map<Objetivo, Integer> getPeso(Objetivo objetivo) {
         return objetivoPesoStrategy.calcularPeso(this.impactos, objetivo);
-    }
+    }*/
 
 
 }

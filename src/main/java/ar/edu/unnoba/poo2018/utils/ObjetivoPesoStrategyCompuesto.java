@@ -3,10 +3,12 @@ package ar.edu.unnoba.poo2018.utils;
 import ar.edu.unnoba.poo2018.model.Impacto;
 import ar.edu.unnoba.poo2018.model.Objetivo;
 
+import javax.ejb.Stateless;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Stateless(name = "compuestoStrategy")
 public class ObjetivoPesoStrategyCompuesto implements ObjetivoPesoStrategy {
 
     @Override

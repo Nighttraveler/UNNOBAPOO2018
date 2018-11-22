@@ -2,30 +2,47 @@ package ar.edu.unnoba.poo2018.model;
 
 import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Actividad {
+
+@Entity
+@Table(name = "Actividades")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Actividad_Tipo", discriminatorType = DiscriminatorType.STRING)
+public abstract class AbstractActividad extends AbstractEntity {
 
     // ---------------------------------------------- Atributos
-	
+
 	private String nombre;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String resolucion;
 	private String expediente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
 	private Convocatoria convocatoria;
+
+    @ManyToOne(fetch = FetchType.LAZY)
 	private LineaEstrategica linea;
+
+    @ManyToOne(fetch = FetchType.LAZY)
 	private Ambito ambito;
+
+    @ManyToMany
+    @JoinTable(name = "actividad_usuario",
+                joinColumns = @JoinColumn(name = "actividad_id"),
+                inverseJoinColumns= @JoinColumn(name = "usuario_id")
+    )
 	private List<Usuario> responsables = new ArrayList<>();
-	private ObjetivoPesoStrategy objetivoPesoStrategy;
 
 	//----------------------------------------------- Constructores
 
 
-    public Actividad(String nombre, Date fechaInicio, Date fechaFin, String resolucion,
+    public AbstractActividad(String nombre, Date fechaInicio, Date fechaFin, String resolucion,
                      String expediente, Convocatoria convocatoria,
                      LineaEstrategica linea, Ambito ambito, List<Usuario> responsables) {
         this.nombre = nombre;
@@ -38,6 +55,8 @@ public abstract class Actividad {
         this.ambito = ambito;
         this.responsables = responsables;
     }
+
+    public AbstractActividad(){}
 
 	// ---------------------------------------------- Getters & Setters
 
@@ -109,7 +128,4 @@ public abstract class Actividad {
 	
 	public abstract List<Impacto> getImpactos();
 
-	public abstract Map<Objetivo, Integer> getPeso();
-	public abstract Map<Objetivo, Integer> getPeso(Objetivo objetivo);
-	 
 }

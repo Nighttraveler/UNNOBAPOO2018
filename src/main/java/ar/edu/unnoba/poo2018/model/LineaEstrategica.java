@@ -1,6 +1,11 @@
 package ar.edu.unnoba.poo2018.model;
 
-public class LineaEstrategica {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LineaEstrategicas")
+public class LineaEstrategica extends AbstractEntity{
 
 	private String nombre;
 	private String descripcion;
@@ -9,6 +14,8 @@ public class LineaEstrategica {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
+
+	public LineaEstrategica(){}
 
 	public String getDescripcion() {
 		return descripcion;

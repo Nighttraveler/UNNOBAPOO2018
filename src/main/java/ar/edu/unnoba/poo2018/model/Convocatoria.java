@@ -1,6 +1,11 @@
 package ar.edu.unnoba.poo2018.model;
 
-public class Convocatoria {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Convocatorias")
+public class Convocatoria extends AbstractEntity{
 	
 	private String nombre;
 	private String descripcion;
@@ -9,6 +14,8 @@ public class Convocatoria {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+    public Convocatoria(){}
 
     public String getDescripcion() {
 		return descripcion;

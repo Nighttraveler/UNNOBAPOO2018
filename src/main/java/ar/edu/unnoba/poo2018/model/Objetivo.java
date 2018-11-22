@@ -1,12 +1,20 @@
 package ar.edu.unnoba.poo2018.model;
 
-public class Objetivo {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Objetivos")
+public class Objetivo extends AbstractEntity{
+
 	
 	private String nombre;
 
 	public Objetivo(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public Objetivo(){}
 
 	public String getNombre() {
 		return nombre;

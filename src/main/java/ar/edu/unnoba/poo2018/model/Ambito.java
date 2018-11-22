@@ -1,6 +1,11 @@
 package ar.edu.unnoba.poo2018.model;
 
-public class Ambito {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Ambitos")
+public class Ambito extends AbstractEntity {
 
 	private String nombre;
 	private String descripcion;
@@ -9,6 +14,8 @@ public class Ambito {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
+
+	public Ambito(){}
 
 	public String getDescripcion() {
 		return descripcion;
