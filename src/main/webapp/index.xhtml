@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/base.xhtml">
+
+        <ui:define name="login">
+            <h:form >
+                <div class="form-group">
+                    <h:outputLabel for="user-email">#{bundle['login.mail.label']}</h:outputLabel>
+                    <p:inputText type="email" styleClass="form-control" id="user-email" value="#{sessionBacking.email}"/>
+
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="user-password">#{bundle['login.password.label']}</h:outputLabel>
+                    <p:password styleClass="form-control" id="user-password" type="password" value="#{sessionBacking.password}" />
+                </div>
+                <h:commandButton styleClass="btn btn-danger" action="#{sessionBacking.login()}" type="submit" value="#{bundle['login.button.value']}"/>
+            </h:form>
+        </ui:define>
+
+
+</ui:composition>

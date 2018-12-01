@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+                template="/base.xhtml">
+
+    <ui:define name="welcome">
+    <h1>
+        <h:outputFormat value="#{bundle['welcome.mensaje']}"  >
+            <f:param value="#{sessionBacking.usuario.getEmail()}" />
+        </h:outputFormat>
+    </h1>
+    <h:form>
+        <h:commandButton value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}" />
+    </h:form>
+    </ui:define>
+
+</ui:composition>

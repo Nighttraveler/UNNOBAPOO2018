@@ -1,31 +1,37 @@
 package ar.edu.unnoba.poo2018.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Usuarios")
+@NamedQueries({
+		@NamedQuery(name = "Usuario.findByEmailAndPassword",
+				query = "select u from Usuario u where u.email = :email and u.password = :password"
+		)
+})
 public class Usuario extends AbstractEntity {
 
 
     @Column(name = "nombre")
 	private String nombre;
 
-    @Column(name = "clave")
-	private String clave;
+    @Column(name = "password")
+	private String password;
 
     @Column(name = "administrador")
 	private boolean administrador;
+
+    @Column(name = "email")
+    private String email;
 
     public Usuario(){
 
 	}
 
-	public Usuario(String nombre, String clave, boolean administrador) {
+	public Usuario(String nombre, String password, boolean administrador) {
 		this.nombre = nombre;
 
-	    this.clave = clave;
+	    this.password = password;
 
 		this.administrador = administrador;
 	}
@@ -37,15 +43,7 @@ public class Usuario extends AbstractEntity {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public String getClave() {
-		return clave;
-	}
 
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-	
 	public boolean isAdministrador() {
 		return administrador;
 	}
@@ -53,5 +51,20 @@ public class Usuario extends AbstractEntity {
 	public void setAdministrador(boolean administrador) {
 		this.administrador = administrador;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
