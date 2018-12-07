@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+    <ui:define name="head">
+        <f:metadata>
+            <f:viewParam name="id" value="#{objetivoBacking.objetivo}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h2>#{bundle['objetivo.update.header']}</h2>
+        <br />
+        <p:panelGrid columns="1" styleClass="">
+            <p:outputLabel value="#{bundle['objetivo.name']}"/>
+
+            <p:inputText value="#{objetivoBacking.objetivo.nombre}"/>
+
+            <p:commandButton value="#{bundle['form.update']}"
+                             action="#{objetivoBacking.update()}"
+                             update="messages"/>
+
+            <p:button value="#{bundle['form.cancel']}" outcome="/objetivos/index"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>

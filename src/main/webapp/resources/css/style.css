@@ -1,9 +1,5 @@
 
-form{
-    text-align: center;
-    font-size: larger;
-}
 
-.test{
-    color: red;
+.right-menu-item{
+    float: right;
 }

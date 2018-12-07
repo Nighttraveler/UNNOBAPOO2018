@@ -2,18 +2,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-
-                template="/base.xhtml">
-
+                template="/template.xhtml">
     <ui:define name="welcome">
-    <h1>
-        <h:outputFormat value="#{bundle['welcome.mensaje']}"  >
-            <f:param value="#{sessionBacking.usuario.getEmail()}" />
-        </h:outputFormat>
-    </h1>
-    <h:form>
-        <h:commandButton value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}" />
-    </h:form>
+        <h:head>
+            <title> Bienvenido a ODS #{sessionBacking.usuario.nombre}!  </title>
+        </h:head>
     </ui:define>
 
 </ui:composition>

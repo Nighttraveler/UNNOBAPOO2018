@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="./../template.xhtml">
+    <ui:define name="content">
+        <p:dataTable id="users"
+                     value="#{userBacking.getAll()}"
+            var="user">
+            <p:column headerText="Email">
+                <h:outputText value="#{user.email}"/>
+            </p:column>
+            <p:column headerText="Password">
+                <h:outputText value="#{user.password}"/>
+            </p:column>
+            <p:column>
+                <h:link icon="ui-icon-check" outcome="#{userBacking.EDIT_USUARIO}" value="Editar">
+                    <f:param name="id" value="#{user.id}" />
+                </h:link>
+            </p:column>
+            <p:column>
+                <p:commandLink actionListener="#{userBacking.delete(user)}" 
+                               value="Eliminar"
+                               update="users">
+                    <p:confirm header="Confirmation" 
+                               message="¿Se eliminará el usuario #{user.email}?"
+                               icon="ui-icon-alert" />
+                </p:commandLink>
+            </p:column>
+        </p:dataTable>
+        <p:button value="Nuevo" outcome="#{userBacking.NEW_USUARIO}"/>
+
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+    </ui:define>
+</ui:composition>

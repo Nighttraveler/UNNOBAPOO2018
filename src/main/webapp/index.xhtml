@@ -6,16 +6,16 @@
 
         <ui:define name="login">
             <h:form >
-                <div class="form-group">
-                    <h:outputLabel for="user-email">#{bundle['login.mail.label']}</h:outputLabel>
+                <div >
+                    <p:outputLabel for="user-email">#{bundle['login.mail.label']}</p:outputLabel>
                     <p:inputText type="email" styleClass="form-control" id="user-email" value="#{sessionBacking.email}"/>
 
                 </div>
-                <div class="form-group">
-                    <h:outputLabel for="user-password">#{bundle['login.password.label']}</h:outputLabel>
-                    <p:password styleClass="form-control" id="user-password" type="password" value="#{sessionBacking.password}" />
+                <div >
+                    <p:outputLabel for="user-password">#{bundle['login.password.label']}</p:outputLabel>
+                    <p:password id="user-password" type="password" value="#{sessionBacking.password}" />
                 </div>
-                <h:commandButton styleClass="btn btn-danger" action="#{sessionBacking.login()}" type="submit" value="#{bundle['login.button.value']}"/>
+                <p:commandButton  action="#{sessionBacking.login()}" type="submit" value="#{bundle['login.button.value']}"/>
             </h:form>
         </ui:define>
 

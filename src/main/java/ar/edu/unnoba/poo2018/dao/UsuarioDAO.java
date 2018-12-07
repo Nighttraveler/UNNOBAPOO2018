@@ -5,6 +5,8 @@ import ar.edu.unnoba.poo2018.model.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class UsuarioDAO extends AbstractDAO<Usuario>{
@@ -24,5 +26,10 @@ public class UsuarioDAO extends AbstractDAO<Usuario>{
             System.out.println(nre.getMessage());
         }
         return user;
+    }
+
+    public List getAllUsers(){
+        Query query =  em.createNamedQuery("Usuario.getAll");
+            return   query.getResultList();
     }
 }

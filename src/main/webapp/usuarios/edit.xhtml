@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="./../template.xhtml">
+    <ui:define name="head">
+        <f:metadata>
+            <f:viewParam name="id" value="#{userBacking.user}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h2>Actualizar los datos del usuario</h2>
+        <br />
+            <p:panelGrid columns="2" styleClass="">
+                <p:outputLabel value="Email"></p:outputLabel>
+                <p:inputText value="#{userBacking.user.email}"/>
+                <p:outputLabel value="Contraseña"></p:outputLabel>
+                <p:password value="#{userBacking.user.password}"/>
+                <p:commandButton value="Actualizar" 
+                                 action="#{userBacking.update()}" 
+                                 update="messages"/>
+                <p:button value="Cancelar" outcome="#{userBacking.INDEX_USUARIOS}"/>
+            </p:panelGrid>
+    </ui:define>
+</ui:composition>

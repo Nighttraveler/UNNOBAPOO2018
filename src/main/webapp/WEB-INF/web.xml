@@ -12,10 +12,10 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <!-- Evita cargar css de primefaces-->
+
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>none</param-value>
+        <param-value>cupertino</param-value>
     </context-param>
 
     <session-config>

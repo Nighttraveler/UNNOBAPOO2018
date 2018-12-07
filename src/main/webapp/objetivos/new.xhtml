@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+
+    <ui:define name="content">
+        <h2>Ingrese los datos del nuevo objetivo</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="">
+            <p:outputLabel for="obj-nombre" value="Nonbre"/>
+            <p:inputText id="obj-nombre" value="#{objetivoBacking.nombre}"/>
+            <p:commandButton value="#{bundle['form.save']}"
+                             action="#{objetivoBacking.create()}"
+                             update="messages"/>
+            <p:button value="#{bundle['form.cancel']}" outcome="#{objetivoBacking.INDEX_OBJETIVOS}"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>
+

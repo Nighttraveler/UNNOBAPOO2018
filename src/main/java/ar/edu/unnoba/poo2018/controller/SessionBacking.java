@@ -3,8 +3,6 @@ package ar.edu.unnoba.poo2018.controller;
 
 import ar.edu.unnoba.poo2018.dao.UsuarioDAO;
 import ar.edu.unnoba.poo2018.model.Usuario;
-import ar.edu.unnoba.poo2018.utils.URLMap;
-
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -12,12 +10,13 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
-import static ar.edu.unnoba.poo2018.utils.URLMap.INDEX;
-import static ar.edu.unnoba.poo2018.utils.URLMap.WELCOME;
 
 @Named
 @SessionScoped
 public class SessionBacking implements Serializable {
+
+    public static final String INDEX = "index";
+    public static final String WELCOME = "welcome";
 
     private String email;
     private String password;
