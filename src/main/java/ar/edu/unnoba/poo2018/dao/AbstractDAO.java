@@ -37,6 +37,14 @@ public abstract class AbstractDAO<T> {
         em.remove(em.contains(t) ? t : em.merge(t));
     }
 
+    public void flush(){
+        em.flush();
+    }
+
+    public void refresh(T t){
+        em.refresh(t);
+    }
+
     public T find(Long id){
         return em.find(typeParameter, id);
     }

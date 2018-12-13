@@ -5,18 +5,30 @@
                 template="/base.xhtml">
 
         <ui:define name="login">
-            <h:form >
-                <div >
-                    <p:outputLabel for="user-email">#{bundle['login.mail.label']}</p:outputLabel>
-                    <p:inputText type="email" styleClass="form-control" id="user-email" value="#{sessionBacking.email}"/>
 
+
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-4"/>
+                    <div class="ui-g-4" >
+                        <div class="text-center">
+                            <h1>#{bundle['welcome.mensaje']}</h1>
+                        </div>
+                        <h:form  styleClass="login_form">
+                            <div>
+                                <p:outputLabel for="user-email">#{bundle['login.mail.label']}</p:outputLabel>
+                                <p:inputText type="email" styleClass="form-control" id="user-email" value="#{sessionBacking.email}"/>
+                            </div>
+
+                            <div>
+                                <p:outputLabel for="user-password">#{bundle['login.password.label']}</p:outputLabel>
+                                <p:password id="user-password" type="password" value="#{sessionBacking.password}" />
+                            </div>
+                            <p:commandButton  action="#{sessionBacking.login()}" type="submit" value="#{bundle['login.button.value']}"/>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-4"/>
                 </div>
-                <div >
-                    <p:outputLabel for="user-password">#{bundle['login.password.label']}</p:outputLabel>
-                    <p:password id="user-password" type="password" value="#{sessionBacking.password}" />
-                </div>
-                <p:commandButton  action="#{sessionBacking.login()}" type="submit" value="#{bundle['login.button.value']}"/>
-            </h:form>
+
         </ui:define>
 
 

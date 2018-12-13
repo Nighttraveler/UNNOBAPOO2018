@@ -44,7 +44,10 @@ public class AbstractEntity implements Serializable {
             return false;
         } else if (!(obj instanceof AbstractEntity)) {
             return false;
-        } else return ((AbstractEntity) obj).id.equals(this.id);
+        } else if ( ((AbstractEntity) obj).id == null ){
+            return false;
+        }
+        else return ((AbstractEntity) obj).id.equals(this.id);
     }
 
 }

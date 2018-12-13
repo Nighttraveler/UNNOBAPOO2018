@@ -15,8 +15,8 @@ import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
 @SessionScoped
 public class SessionBacking implements Serializable {
 
-    public static final String INDEX = "index";
-    public static final String WELCOME = "welcome";
+    private static final String INDEX = "index";
+    private static final String WELCOME = "welcome";
 
     private String email;
     private String password;

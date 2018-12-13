@@ -3,30 +3,30 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="./../template.xhtml">
+                template="../../template.xhtml">
     <ui:define name="content">
-        <p:dataTable id="objetivos"
-                     value="#{objetivoBacking.getAll()}"
-                     var="objetivo">
-            <p:column headerText="#{bundle['objetivo.name']}">
-                <h:outputText value="#{objetivo.nombre}"/>
+        <p:dataTable id="actividades"
+                     value="#{actividadBacking.all}"
+                     var="actividad">
+            <p:column headerText="#{bundle['actividad']}">
+                <h:outputText value="#{actividad.nombre}"/>
             </p:column>
             <p:column>
-                <h:link styleClass="ui-icon-pencil" outcome="#{objetivoBacking.EDIT_OBJETIVO}" value="#{bundle['form.edit']}">
-                    <f:param name="id" value="#{objetivo.id}" />
+                <h:link outcome="#{actividadBacking.EDIT_ACTIVIDAD}" value="#{bundle['form.edit']}">
+                    <f:param name="id" value="#{actividad.id}" />
                 </h:link>
             </p:column>
             <p:column>
-                <p:commandLink actionListener="#{objetivoBacking.delete(objetivo)}"
+                <p:commandLink actionListener="#{actividadBacking.delete(actividad)}"
                                value="#{bundle['form.delete']}"
-                               update="objetivos">
+                               update="actividades">
                     <p:confirm header="Confirmation"
-                               message="#{bundle['objetivos.delete.confirmation.question']} #{objetivo.nombre}? "
+                               message="¿#{bundle['activades.delete.confirmation.question']} #{actividad.nombre}?"
                                icon="ui-icon-alert" />
                 </p:commandLink>
             </p:column>
         </p:dataTable>
-        <p:button value="Nuevo" outcome="#{objetivoBacking.NEW_OBJETIVO}"/>
+        <p:button value="#{bundle['actividades.create']}" outcome="#{actividadBacking.NEW_ACTIVIDAD}"/>
 
 
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

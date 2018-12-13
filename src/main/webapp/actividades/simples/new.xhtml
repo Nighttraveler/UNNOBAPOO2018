@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template.xhtml">
+
+    <ui:define name="content">
+        <h2>Ingrese los datos de la nueva actividad</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="">
+            <p:outputLabel value="#{bundle['actividades.name']}"/>
+            <p:inputText value="#{actividadBacking.actividad.nombre}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="2" >
+            <p:outputLabel value="#{bundle['objetivo']}"/>
+            <p:selectOneMenu value="#{actividadBacking.impacto.objetivo}">
+                <f:selectItems value="#{actividadBacking.objetivos}"
+                               var="objetivo" itemLabel="#{objetivo.nombre}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="#{bundle['impacto.weight']}"/>
+            <p:inputText value="#{actividadBacking.impacto.peso}"/>
+            <p:commandButton value="#{bundle['impacto.save']}"
+                             actionListener="#{actividadBacking.agregarImpacto()}"
+                             update="messages,actividad_impactos"/>
+        </p:panelGrid>
+
+        <p:dataTable id="actividad_impactos" value="#{actividadBacking.actividad.impactos}" var="impacto">
+            <p:column headerText="#{bundle['objetivo']}">#{impacto.objetivo.nombre}</p:column>
+            <p:column headerText="#{bundle['impacto.weight']}">#{impacto.peso}</p:column>
+        </p:dataTable>
+
+        <p:commandButton value="#{bundle['form.save']}"
+                         action="#{actividadBacking.create()}"
+                         update="messages"/>
+        <p:button value="#{bundle['form.cancel']}" outcome="#{actividadBacking.INDEX_ACTIVIDADES}"/>
+    </ui:define>
+</ui:composition>
+

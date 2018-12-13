@@ -8,10 +8,10 @@
         <p:dataTable id="users"
                      value="#{userBacking.getAll()}"
             var="user">
-            <p:column headerText="Email">
+            <p:column headerText="#{bundle['usuario.email']}">
                 <h:outputText value="#{user.email}"/>
             </p:column>
-            <p:column headerText="Password">
+            <p:column headerText="#{bundle['usuario.password']}">
                 <h:outputText value="#{user.password}"/>
             </p:column>
             <p:column>
@@ -21,10 +21,10 @@
             </p:column>
             <p:column>
                 <p:commandLink actionListener="#{userBacking.delete(user)}" 
-                               value="Eliminar"
+                               value="#{bundle['form.delete']}"
                                update="users">
                     <p:confirm header="Confirmation" 
-                               message="¿Se eliminará el usuario #{user.email}?"
+                               message="#{bundle['usuario.delete.confirmation.question']} #{user.email}?"
                                icon="ui-icon-alert" />
                 </p:commandLink>
             </p:column>
@@ -33,8 +33,8 @@
 
 
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            <p:commandButton value="#{bundle['form.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="#{bundle['form.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </p:confirmDialog>
     </ui:define>
 </ui:composition>

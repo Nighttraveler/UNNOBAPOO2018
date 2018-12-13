@@ -9,14 +9,14 @@
         <h2>Ingrese los datos del nuevo usuario</h2>
         <br />
         <p:panelGrid columns="2" styleClass="">
-            <p:outputLabel value="Usuario"/>
+            <p:outputLabel value="#{bundle['usuario.email']}"/>
             <p:inputText value="#{userBacking.user.email}"/>
-            <p:outputLabel value="Contraseña"/>
+            <p:outputLabel value="#{bundle['usuario.password']}"/>
             <p:password value="#{userBacking.user.password}"/>
-            <p:commandButton value="Guardar" 
+            <p:commandButton value="#{bundle['form.save']}"
                              action="#{userBacking.create()}" 
                              update="messages"/>
-            <p:button value="Cancelar" outcome="#{userBacking.INDEX_USUARIOS}"/>
+            <p:button value="#{bundle['form.cancel']}" outcome="#{userBacking.INDEX_USUARIOS}"/>
         </p:panelGrid>
     </ui:define>
 </ui:composition>

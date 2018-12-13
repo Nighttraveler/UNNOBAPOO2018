@@ -1,13 +1,20 @@
 package ar.edu.unnoba.poo2018.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Impactos")
 public class Impacto extends AbstractEntity{
 
+	@ManyToOne
+    @JoinColumn(name = "objetivo_id")
+    @CascadeOnDelete
 	private Objetivo objetivo;
+
+
+
 	private int peso;
 
 	public Impacto(int peso, Objetivo objetivo) {

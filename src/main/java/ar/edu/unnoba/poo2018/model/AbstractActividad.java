@@ -1,6 +1,7 @@
 package ar.edu.unnoba.poo2018.model;
 
 import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +13,12 @@ import java.util.Map;
 @Entity
 @Table(name = "Actividades")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@CascadeOnDelete
 @DiscriminatorColumn(name = "Actividad_Tipo", discriminatorType = DiscriminatorType.STRING)
+@NamedQueries({
+		@NamedQuery(name = "actividad.getAll",
+				query = "Select a From AbstractActividad a order by a.nombre")
+})
 public abstract class AbstractActividad extends AbstractEntity {
 
     // ---------------------------------------------- Atributos

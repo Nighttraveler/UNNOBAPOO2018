@@ -1,7 +1,6 @@
 package ar.edu.unnoba.poo2018.model;
 
-import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
-import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategySimple;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.util.*;
@@ -10,8 +9,9 @@ import java.util.*;
 @DiscriminatorValue("Actividad_Simple")
 public class ActividadSimple extends AbstractActividad {
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "actividad")
+    @CascadeOnDelete
 	private List<Impacto> impactos = new ArrayList<Impacto>();
 
     public ActividadSimple(String nombre, Date fechaInicio, Date fechaFin, String resolucion, String expediente,
@@ -41,7 +41,11 @@ public class ActividadSimple extends AbstractActividad {
 		return impactos;
 	}
 
-/*
+    public void setImpactos(List<Impacto> impactos) {
+        this.impactos = impactos;
+    }
+
+	/*
 
 	public Map<Objetivo, Integer> getPeso(){
         return objetivoPesoStrategy.calcularPeso(this.impactos);

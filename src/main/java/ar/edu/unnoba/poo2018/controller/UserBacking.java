@@ -7,12 +7,12 @@ package ar.edu.unnoba.poo2018.controller;
 
 import ar.edu.unnoba.poo2018.dao.UsuarioDAO;
 import ar.edu.unnoba.poo2018.model.Usuario;
+import ar.edu.unnoba.poo2018.utils.JSFUtils;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -74,9 +74,7 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
         if(!sessionBacking.getUsuario().equals(user)){
             userDao.delete(user);
         }else{
-           FacesContext context = FacesContext.getCurrentInstance();
-           FacesMessage message = new FacesMessage("No puede borrar este usuario");
-           context.addMessage(null, message);
+            JSFUtils.createFacesMessage("No te podes borrar a vos mismo amigo");
         }
         
     }

@@ -4,40 +4,38 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                template="base.xhtml">
+                template="/base.xhtml">
 
     <ui:define name="menu" >
         <f:view contentType="text/html">
-
-
-            <h:outputFormat value="#{bundle['welcome.mensaje']}"  >
-                <f:param value="#{sessionBacking.usuario.getEmail()}" />
-            </h:outputFormat>
-¡
-            <h:form>
-                <p:commandButton value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}" />
-            </h:form>
-
             <h:form>
                 <p:growl id="messages" autoUpdate="true"/>
-                <div id="navbar">
-
-                        <p:menubar>
-                            <c:if test="#{sessionBacking.usuario.administrador}">
-                            <p:submenu label="Usuarios">
-                                <p:menuitem  value="Listar" url="#{userBacking.INDEX_USUARIOS}" />
-                                <p:menuitem  value="Nuevo" url="#{userBacking.NEW_USUARIO}" />
-                            </p:submenu>
-                            </c:if>
-                            <p:submenu label="#{bundle['objetivos']}">
-                                <p:menuitem value="#{bundle['form.list']}" url="#{objetivoBacking.INDEX_OBJETIVOS}"/>
-                                <p:menuitem value="#{bundle['form.create']}" url="#{objetivoBacking.NEW_OBJETIVO}"/>
-                            </p:submenu>
-                        </p:menubar>
-                </div>
 
 
-        <div id="content" class="container">
+                    <p:menubar>
+                        <c:if test="#{sessionBacking.usuario.administrador}">
+                        <p:submenu label="Usuarios">
+                            <p:menuitem  value="Listar" url="#{userBacking.INDEX_USUARIOS}" />
+                            <p:menuitem  value="Nuevo" url="#{userBacking.NEW_USUARIO}" />
+                        </p:submenu>
+                        </c:if>
+                        <p:submenu label="#{bundle['objetivos']}">
+                            <p:menuitem value="#{bundle['form.list']}" url="#{objetivoBacking.INDEX_OBJETIVOS}"/>
+                            <p:menuitem value="#{bundle['form.create']}" url="#{objetivoBacking.NEW_OBJETIVO}"/>
+                        </p:submenu>
+                        <p:submenu label="#{bundle['actividades']}">
+                            <p:menuitem value="#{bundle['form.list']}" url="#{actividadBacking.INDEX_ACTIVIDADES}"/>
+                            <p:menuitem value="#{bundle['form.create']}" url="#{actividadBacking.NEW_ACTIVIDAD}"/>
+                        </p:submenu>
+                        <p:submenu styleClass="nav-items" label="#{sessionBacking.usuario.getEmail()}" >
+                            <p:menuitem  value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}"/>
+                        </p:submenu>
+
+                    </p:menubar>
+
+
+
+        <div id="content" class="content">
             <ui:insert name="content"/>
         </div>
 

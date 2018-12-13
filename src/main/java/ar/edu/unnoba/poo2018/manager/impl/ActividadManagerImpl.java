@@ -1,6 +1,7 @@
 package ar.edu.unnoba.poo2018.manager.impl;
 
 import ar.edu.unnoba.poo2018.dao.ActividadDAO;
+import ar.edu.unnoba.poo2018.dao.ImpactoDAO;
 import ar.edu.unnoba.poo2018.manager.ActividadManager;
 import ar.edu.unnoba.poo2018.model.AbstractActividad;
 import ar.edu.unnoba.poo2018.model.ActividadSimple;
@@ -20,13 +21,16 @@ import java.util.stream.Collectors;
 public class ActividadManagerImpl implements ActividadManager {
 
     @EJB
-    ActividadDAO actividadDAO;
+    private ActividadDAO actividadDAO;
+
+    @EJB
+    private ImpactoDAO impactoDAO;
 
     @EJB(beanName = "simpleStrategy")
-    ObjetivoPesoStrategy simpleStrategy;
+    private ObjetivoPesoStrategy simpleStrategy;
 
     @EJB(beanName = "compuestoStrategy")
-    ObjetivoPesoStrategy compuestoStrategy;
+    private ObjetivoPesoStrategy compuestoStrategy;
 
 
     @Override
@@ -71,6 +75,11 @@ public class ActividadManagerImpl implements ActividadManager {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    @Override
+    public List<AbstractActividad> obtenerActividades(){
+        return actividadDAO.getAllActividades();
     }
 
     @Override

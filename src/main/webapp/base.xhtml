@@ -6,17 +6,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 
-    <link rel="stylesheet" href="resources/css/style.css"/>
-    <script type="text/javascript" src="resources/js/script.js"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <h:outputScript name="/js/script.js"/>
     <ui:insert name="head"/>
     <ui:insert name="welcome"/>
 
 </h:head>
 <h:body>
 
-    <div class="container">
-        <ui:insert name="login"/>
-    </div>
+
+    <ui:insert name="login"/>
+
 
     <ui:insert name="menu"/>
 
