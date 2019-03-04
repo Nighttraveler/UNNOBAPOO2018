@@ -8,6 +8,7 @@ package ar.edu.unnoba.poo2018.controller;
 import ar.edu.unnoba.poo2018.dao.UsuarioDAO;
 import ar.edu.unnoba.poo2018.model.Usuario;
 import ar.edu.unnoba.poo2018.utils.JSFUtils;
+import ar.edu.unnoba.poo2018.utils.URLMap;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,12 +18,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
 
-/**
- *
- * @author jpgm
- */
 @Named
 @ViewScoped
 public class UserBacking implements Serializable, CRUDBacking<Usuario> {
@@ -36,6 +32,9 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
     
     @EJB
     private UsuarioDAO userDao;
+
+    @EJB
+    private URLMap urlMap;
     
     @Inject
     private SessionBacking sessionBacking;
@@ -48,7 +47,7 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
     public String create(){
         try{
             userDao.create(user);
-            return INDEX_USUARIOS + FACES_REDIRECT;
+            return urlMap.getIndexUsuarios() + urlMap.getFacesRedirect();
         }catch(Exception e){
             return null;
         }
@@ -63,7 +62,7 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
     public String update(){
         try{
             userDao.update(user);
-            return INDEX_USUARIOS + FACES_REDIRECT;
+            return urlMap.getIndexUsuarios() + urlMap.getFacesRedirect();
         }catch(Exception e){
             return null;
         }
@@ -92,30 +91,11 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
     }
 
 
-    // URLS para usuarios
-    private static final String USUARIOS = "/usuarios/";
-    private final String INDEX_USUARIOS = USUARIOS + "index.xhtml";
-    private final String NEW_USUARIO = USUARIOS + "new.xhtml";
-    private final String EDIT_USUARIO = USUARIOS + "edit.xhtml";
-    private final String DETAIL_USUARIO = USUARIOS + "details.xhtml";
-
-    public static String getUSUARIOS() {
-        return USUARIOS;
+    public URLMap getUrlMap() {
+        return urlMap;
     }
 
-    public String getINDEX_USUARIOS() {
-        return INDEX_USUARIOS;
-    }
-
-    public String getNEW_USUARIO() {
-        return NEW_USUARIO;
-    }
-
-    public String getEDIT_USUARIO() {
-        return EDIT_USUARIO;
-    }
-
-    public String getDETAIL_USUARIO() {
-        return DETAIL_USUARIO;
+    public void setUrlMap(URLMap urlMap) {
+        this.urlMap = urlMap;
     }
 }

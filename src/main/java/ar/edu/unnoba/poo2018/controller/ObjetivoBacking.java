@@ -3,6 +3,7 @@ package ar.edu.unnoba.poo2018.controller;
 import ar.edu.unnoba.poo2018.dao.ObjetivoDAO;
 import ar.edu.unnoba.poo2018.model.Objetivo;
 import ar.edu.unnoba.poo2018.utils.JSFUtils;
+import ar.edu.unnoba.poo2018.utils.URLMap;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,8 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
-
 @Named
 @ViewScoped
 public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
@@ -24,6 +23,9 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
 
     @EJB
     private ObjetivoDAO objetivoDAO;
+
+    @EJB
+    private URLMap urlMap;
 
     private Objetivo objetivo;
 
@@ -41,7 +43,7 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
         try {
             objetivo.setNombre(this.nombre);
             objetivoDAO.create(objetivo);
-            return INDEX_OBJETIVOS + FACES_REDIRECT;
+            return urlMap.getIndexObjetivos() + urlMap.getFacesRedirect();
         }catch (EJBException e){
             logger.log(Level.SEVERE, e.getMessage());
         }
@@ -57,7 +59,7 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
     public String update() {
         try {
             objetivoDAO.update(objetivo);
-            return INDEX_OBJETIVOS + FACES_REDIRECT;
+            return urlMap.getIndexObjetivos() + urlMap.getFacesRedirect();
         }catch (EJBException e){
             logger.log(Level.SEVERE, e.getMessage());
             return null;
@@ -102,26 +104,11 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
         this.nombre = nombre;
     }
 
-    // URLS para objetivos
-    private static final String OBJETIVOS = "/objetivos/";
-    private final String INDEX_OBJETIVOS = OBJETIVOS + "index.xhtml";
-    private final String NEW_OBJETIVO = OBJETIVOS + "new.xhtml";
-    private final String EDIT_OBJETIVO = OBJETIVOS + "edit.xhtml";
-    private final String DETAIL_OBJETIVO = OBJETIVOS + "details.xhtml";
-
-    public String getINDEX_OBJETIVOS() {
-        return INDEX_OBJETIVOS;
+    public URLMap getUrlMap() {
+        return urlMap;
     }
 
-    public String getNEW_OBJETIVO() {
-        return NEW_OBJETIVO;
-    }
-
-    public String getEDIT_OBJETIVO() {
-        return EDIT_OBJETIVO;
-    }
-
-    public String getDETAIL_OBJETIVO() {
-        return DETAIL_OBJETIVO;
+    public void setUrlMap(URLMap urlMap) {
+        this.urlMap = urlMap;
     }
 }

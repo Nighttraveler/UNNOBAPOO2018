@@ -14,7 +14,7 @@
             <p:commandButton value="#{bundle['form.save']}"
                              action="#{objetivoBacking.create()}"
                              update="messages"/>
-            <p:button value="#{bundle['form.cancel']}" outcome="#{objetivoBacking.INDEX_OBJETIVOS}"/>
+            <p:button value="#{bundle['form.cancel']}" outcome="#{objetivoBacking.urlMap.getIndexObjetivos()}"/>
         </p:panelGrid>
     </ui:define>
 </ui:composition>

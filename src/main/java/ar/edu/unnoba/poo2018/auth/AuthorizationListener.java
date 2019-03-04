@@ -16,13 +16,14 @@ package ar.edu.unnoba.poo2018.auth;
 
 import ar.edu.unnoba.poo2018.controller.SessionBacking;
 import ar.edu.unnoba.poo2018.model.Usuario;
+import ar.edu.unnoba.poo2018.utils.URLMap;
+
+import javax.ejb.EJB;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-
-import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
 
 /*
  *
@@ -30,7 +31,8 @@ import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
  */
 public class AuthorizationListener implements PhaseListener {
 
-    private static final String INDEX_PAGE = "/index.xhtml";
+    @EJB
+    private URLMap urlMap;
 
     @Override
     public void afterPhase(PhaseEvent event) {
@@ -50,9 +52,9 @@ public class AuthorizationListener implements PhaseListener {
         }
 
         if(currentUser == null){
-            if(!currentPage.equals(INDEX_PAGE)){
+            if(!currentPage.equals(urlMap.getINDEX())){
                 NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-                nh.handleNavigation(facesContext, null, INDEX_PAGE + FACES_REDIRECT);
+                nh.handleNavigation(facesContext, null, urlMap.getINDEX() + urlMap.getFacesRedirect());
             }
         }
     }
@@ -64,5 +66,13 @@ public class AuthorizationListener implements PhaseListener {
     @Override
     public PhaseId getPhaseId() {
         return PhaseId.RESTORE_VIEW;
+    }
+
+    public URLMap getUrlMap() {
+        return urlMap;
+    }
+
+    public void setUrlMap(URLMap urlMap) {
+        this.urlMap = urlMap;
     }
 }

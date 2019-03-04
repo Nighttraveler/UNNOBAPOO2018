@@ -3,20 +3,18 @@ package ar.edu.unnoba.poo2018.controller;
 
 import ar.edu.unnoba.poo2018.dao.UsuarioDAO;
 import ar.edu.unnoba.poo2018.model.Usuario;
+import ar.edu.unnoba.poo2018.utils.URLMap;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
-import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
-
 @Named
 @SessionScoped
 public class SessionBacking implements Serializable {
 
-    private static final String INDEX = "index";
-    private static final String WELCOME = "welcome";
+
 
     private String email;
     private String password;
@@ -26,10 +24,13 @@ public class SessionBacking implements Serializable {
     @EJB
     private UsuarioDAO usuarioDAO;
 
+    @EJB
+    private URLMap urlMap;
+
     public String login(){
         usuario = usuarioDAO.findByEmailAndPassword(this.email, this.password);
 
-        return (usuario!=null) ? WELCOME + FACES_REDIRECT : null;
+        return (usuario!=null) ? urlMap.getWELCOME() + urlMap.getFacesRedirect() : null;
     }
 
     public String logout(){
@@ -37,7 +38,7 @@ public class SessionBacking implements Serializable {
         this.email = null;
         this.password = null;
 
-        return INDEX +  FACES_REDIRECT;
+        return urlMap.getINDEX() +  urlMap.getFacesRedirect();
 
     }
 
@@ -63,5 +64,13 @@ public class SessionBacking implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public URLMap getUrlMap() {
+        return urlMap;
+    }
+
+    public void setUrlMap(URLMap urlMap) {
+        this.urlMap = urlMap;
     }
 }

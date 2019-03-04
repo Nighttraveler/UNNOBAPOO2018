@@ -20,7 +20,7 @@
                 <p:commandButton value="#{bundle['form.update']}"
                                  action="#{userBacking.update()}" 
                                  update="messages"/>
-                <p:button value="#{bundle['form.cancel']}" outcome="#{userBacking.INDEX_USUARIOS}"/>
+                <p:button value="#{bundle['form.cancel']}" outcome="#{userBacking.urlMap.getIndexUsuarios()}"/>
             </p:panelGrid>
     </ui:define>
 </ui:composition>

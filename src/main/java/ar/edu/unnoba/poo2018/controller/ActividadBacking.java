@@ -6,6 +6,7 @@ import ar.edu.unnoba.poo2018.model.AbstractActividad;
 import ar.edu.unnoba.poo2018.model.ActividadSimple;
 import ar.edu.unnoba.poo2018.model.Impacto;
 import ar.edu.unnoba.poo2018.model.Objetivo;
+import ar.edu.unnoba.poo2018.utils.URLMap;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,7 +18,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static ar.edu.unnoba.poo2018.utils.URLMap.FACES_REDIRECT;
 
 @Named
 @ViewScoped
@@ -33,6 +33,9 @@ public class ActividadBacking implements Serializable, CRUDBacking<AbstractActiv
         this.actividad = new ActividadSimple();
         this.impacto = new Impacto();
     }
+
+    @EJB
+    private URLMap urlMap;
 
     @EJB
     private ActividadManager actividadManager;
@@ -61,7 +64,7 @@ public class ActividadBacking implements Serializable, CRUDBacking<AbstractActiv
     public String create(){
         try{
             actividadManager.insertarActividad(actividad);
-            return INDEX_ACTIVIDADES + FACES_REDIRECT;
+            return urlMap.getIndexActividades() + urlMap.getFacesRedirect();
         }catch(Exception e){
             logger.log(Level.SEVERE, e.getMessage());
             return null;
@@ -72,7 +75,7 @@ public class ActividadBacking implements Serializable, CRUDBacking<AbstractActiv
     public String update(){
         try{
             actividadManager.actualizarActividad(actividad);
-            return INDEX_ACTIVIDADES + FACES_REDIRECT;
+            return urlMap.getIndexActividades() + urlMap.getFacesRedirect();
         }catch(Exception e){
             logger.log(Level.SEVERE, e.getMessage());
             return null;
@@ -110,26 +113,11 @@ public class ActividadBacking implements Serializable, CRUDBacking<AbstractActiv
         this.impacto = impacto;
     }
 
-    // URLS para Actividades
-    private static final String ACTIVIDADES_SIMPLES = "/actividades/simples/";
-    private final String INDEX_ACTIVIDADES = ACTIVIDADES_SIMPLES + "index.xhtml";
-    private final String NEW_ACTIVIDAD = ACTIVIDADES_SIMPLES + "new.xhtml";
-    private final String EDIT_ACTIVIDAD = ACTIVIDADES_SIMPLES + "edit.xhtml";
-    private final String DETAIL_ACTIVIDAD = ACTIVIDADES_SIMPLES + "details.xhtml";
-
-    public String getINDEX_ACTIVIDADES() {
-        return INDEX_ACTIVIDADES;
+    public URLMap getUrlMap() {
+        return urlMap;
     }
 
-    public String getNEW_ACTIVIDAD() {
-        return NEW_ACTIVIDAD;
-    }
-
-    public String getEDIT_ACTIVIDAD() {
-        return EDIT_ACTIVIDAD;
-    }
-
-    public String getDETAIL_ACTIVIDAD() {
-        return DETAIL_ACTIVIDAD;
+    public void setUrlMap(URLMap urlMap) {
+        this.urlMap = urlMap;
     }
 }

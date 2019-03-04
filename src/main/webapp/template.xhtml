@@ -15,17 +15,17 @@
                     <p:menubar>
                         <c:if test="#{sessionBacking.usuario.administrador}">
                         <p:submenu label="Usuarios">
-                            <p:menuitem  value="Listar" url="#{userBacking.INDEX_USUARIOS}" />
-                            <p:menuitem  value="Nuevo" url="#{userBacking.NEW_USUARIO}" />
+                            <p:menuitem  value="Listar" url="#{userBacking.urlMap.getIndexUsuarios()}" />
+                            <p:menuitem  value="Nuevo" url="#{userBacking.urlMap.getNewUsuario()}" />
                         </p:submenu>
                         </c:if>
                         <p:submenu label="#{bundle['objetivos']}">
-                            <p:menuitem value="#{bundle['form.list']}" url="#{objetivoBacking.INDEX_OBJETIVOS}"/>
-                            <p:menuitem value="#{bundle['form.create']}" url="#{objetivoBacking.NEW_OBJETIVO}"/>
+                            <p:menuitem value="#{bundle['form.list']}" url="#{objetivoBacking.urlMap.getIndexObjetivos()}"/>
+                            <p:menuitem value="#{bundle['form.create']}" url="#{objetivoBacking.urlMap.getNewObjetivo()}"/>
                         </p:submenu>
                         <p:submenu label="#{bundle['actividades']}">
-                            <p:menuitem value="#{bundle['form.list']}" url="#{actividadBacking.INDEX_ACTIVIDADES}"/>
-                            <p:menuitem value="#{bundle['form.create']}" url="#{actividadBacking.NEW_ACTIVIDAD}"/>
+                            <p:menuitem value="#{bundle['form.list']}" url="#{actividadBacking.urlMap.getIndexActividades()}"/>
+                            <p:menuitem value="#{bundle['form.create']}" url="#{actividadBacking.urlMap.getNewActividad()}"/>
                         </p:submenu>
                         <p:submenu styleClass="nav-items" label="#{sessionBacking.usuario.getEmail()}" >
                             <p:menuitem  value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}"/>

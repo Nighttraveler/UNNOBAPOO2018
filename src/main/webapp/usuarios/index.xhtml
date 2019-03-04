@@ -15,7 +15,7 @@
                 <h:outputText value="#{user.password}"/>
             </p:column>
             <p:column>
-                <h:link icon="ui-icon-check" outcome="#{userBacking.EDIT_USUARIO}" value="Editar">
+                <h:link icon="ui-icon-check" outcome="#{userBacking.urlMap.getEditUsuario()}" value="Editar">
                     <f:param name="id" value="#{user.id}" />
                 </h:link>
             </p:column>
@@ -29,7 +29,7 @@
                 </p:commandLink>
             </p:column>
         </p:dataTable>
-        <p:button value="Nuevo" outcome="#{userBacking.NEW_USUARIO}"/>
+        <p:button value="Nuevo" outcome="#{userBacking.urlMap.getNewUsuario()}"/>
 
 
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
