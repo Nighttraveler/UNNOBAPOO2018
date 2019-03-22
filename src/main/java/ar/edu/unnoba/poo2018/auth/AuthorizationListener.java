@@ -50,6 +50,12 @@ public class AuthorizationListener implements PhaseListener {
         if(sessionBacking != null){
             currentUser = sessionBacking.getUsuario();
         }
+        if(null != currentUser && !currentUser.isAdministrador()){
+            if(currentPage.matches(".*(new|edit).xhtml.*")){
+                NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
+                nh.handleNavigation(facesContext, null, urlMap.getWELCOME() + urlMap.getFacesRedirect());
+            }
+        }
 
         if(currentUser == null){
             if(!currentPage.equals(urlMap.getINDEX())){
