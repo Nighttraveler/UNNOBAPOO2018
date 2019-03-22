@@ -3,6 +3,7 @@ package ar.edu.unnoba.poo2018.controller;
 
 import ar.edu.unnoba.poo2018.dao.UsuarioDAO;
 import ar.edu.unnoba.poo2018.model.Usuario;
+import ar.edu.unnoba.poo2018.utils.DataBasePopulator;
 import ar.edu.unnoba.poo2018.utils.URLMap;
 
 import javax.ejb.EJB;
@@ -30,7 +31,7 @@ public class SessionBacking implements Serializable {
     public String login(){
         usuario = usuarioDAO.findByEmailAndPassword(this.email, this.password);
 
-        return (usuario!=null) ? urlMap.getWELCOME() + urlMap.getFacesRedirect() : null;
+        return (usuario!=null) ? urlMap.getWELCOME() + URLMap.getFacesRedirect() : null;
     }
 
     public String logout(){
@@ -38,7 +39,7 @@ public class SessionBacking implements Serializable {
         this.email = null;
         this.password = null;
 
-        return urlMap.getINDEX() +  urlMap.getFacesRedirect();
+        return urlMap.getINDEX() +  URLMap.getFacesRedirect();
 
     }
 

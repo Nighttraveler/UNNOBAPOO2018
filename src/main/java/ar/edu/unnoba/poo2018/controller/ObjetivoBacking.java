@@ -43,7 +43,7 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
         try {
             objetivo.setNombre(this.nombre);
             objetivoDAO.create(objetivo);
-            return urlMap.getIndexObjetivos() + urlMap.getFacesRedirect();
+            return urlMap.getIndexObjetivos() + URLMap.getFacesRedirect();
         }catch (EJBException e){
             logger.log(Level.SEVERE, e.getMessage());
         }
@@ -51,7 +51,7 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
     }
 
     @Override
-    public String read() {
+    public String retrieve() {
         return null;
     }
 
@@ -59,7 +59,7 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
     public String update() {
         try {
             objetivoDAO.update(objetivo);
-            return urlMap.getIndexObjetivos() + urlMap.getFacesRedirect();
+            return urlMap.getIndexObjetivos() + URLMap.getFacesRedirect();
         }catch (EJBException e){
             logger.log(Level.SEVERE, e.getMessage());
             return null;
@@ -72,7 +72,9 @@ public class ObjetivoBacking implements Serializable, CRUDBacking<Objetivo> {
             objetivoDAO.delete(entity);
         } catch (EJBException e){
             logger.log(Level.SEVERE, e.getMessage());
-            JSFUtils.createFacesMessage("Se produjo un error al intentar borrar este objetivo, Por favor verifique que no hay actividades relacionadas a el.");
+            JSFUtils.createFacesMessage(
+                    String.format("Se produjo un error al intentar borrar '%s', Por favor verifique que no hay actividades relacionadas a el.",
+                            entity.getNombre()));
         }
 
     }

@@ -6,15 +6,12 @@ public interface CRUDBacking<T> {
 
     String create();
 
-    String read();
+    String retrieve();
 
     String update();
 
     void delete(T entity);
 
     List<T> getAll();
-
-
-
 
 }

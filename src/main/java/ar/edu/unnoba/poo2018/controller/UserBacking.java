@@ -47,22 +47,22 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
     public String create(){
         try{
             userDao.create(user);
-            return urlMap.getIndexUsuarios() + urlMap.getFacesRedirect();
+            return urlMap.getIndexUsuarios() + URLMap.getFacesRedirect();
         }catch(Exception e){
             return null;
         }
     }
 
-
-    public String read() {
+    @Override
+    public String retrieve() {
         return null;
     }
 
-
+    @Override
     public String update(){
         try{
             userDao.update(user);
-            return urlMap.getIndexUsuarios() + urlMap.getFacesRedirect();
+            return urlMap.getIndexUsuarios() + URLMap.getFacesRedirect();
         }catch(Exception e){
             return null;
         }
@@ -78,6 +78,7 @@ public class UserBacking implements Serializable, CRUDBacking<Usuario> {
         
     }
 
+    @Override
     public List<Usuario> getAll() {
         return getUsers();
     }
