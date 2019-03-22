@@ -1,5 +1,4 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
@@ -12,35 +11,104 @@
     <ui:define name="content">
         <h2>#{bundle['actividades.edit.header']}</h2>
         <br />
-        <p:panelGrid columns="2" styleClass="">
-            <p:outputLabel value="#{bundle['actividad']}"/>
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['actividades.name']}"/>
             <p:inputText value="#{actividadBacking.actividad.nombre}"/>
         </p:panelGrid>
 
-        <p:panelGrid columns="2" >
-            <p:outputLabel value="#{bundle['objetivo.name']}"/>
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['actividad.resolucion']}"/>
+            <p:inputText value="#{actividadBacking.actividad.resolucion}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['actividad.expediente']}"/>
+            <p:inputText value="#{actividadBacking.actividad.expediente}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="4" layout="grid">
+            <p:outputLabel value="#{bundle['actividad.fechainicio']}" />
+            <p:calendar value="#{actividadBacking.actividad.fechaInicio}" />
+            <p:outputLabel value="#{bundle['actividad.fechafin']}" />
+            <p:calendar value="#{actividadBacking.actividad.fechaFin}"  />
+        </p:panelGrid>
+
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['convocatoria']}"/>
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadBacking.actividad.convocatoria}">
+                <f:selectItems value="#{convocatoriaBacking.all}"
+                               var="convocatoria" itemLabel="#{convocatoria.nombre}"/>
+            </p:selectOneMenu>
+        </p:panelGrid>
+
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['lineaestrategica']}"/>
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadBacking.actividad.linea}">
+                <f:selectItems value="#{lineaEstrategicaBacking.all}"
+                               var="linea" itemLabel="#{linea.nombre}"/>
+            </p:selectOneMenu>
+        </p:panelGrid>
+
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel value="#{bundle['ambito']}"/>
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadBacking.actividad.ambito}">
+                <f:selectItems value="#{ambitoBacking.all}"
+                               var="ambito" itemLabel="#{ambito.nombre}"/>
+            </p:selectOneMenu>
+        </p:panelGrid>
+
+
+        <p:panelGrid columns="3" layout="grid">
+
+            <p:outputLabel for="usuarios_list" value="#{bundle['actividad.responsables.form']}"/>
+
+            <p:selectManyMenu  scrollHeight="400" id="usuarios_list" style="width: 95%;" value="#{actividadBacking.responsablesIds}"
+                               filter="true" filterMatchMode="contains" showCheckbox="true">
+                <f:selectItems value="#{userBacking.all}"
+                               var="user" itemLabel="#{user.email}" itemValue="#{user.id}"/>
+            </p:selectManyMenu>
+
+            <p:dataTable scrollHeight="400" id="actividad_responsables" value="#{actividadBacking.actividad.responsables}" var="user">
+                <p:column headerText="#{bundle['actividad.responsables']}">#{user.email}</p:column>
+                <p:column>
+                    <p:commandLink actionListener="#{actividadBacking.quitarResponsable(user, actividadBacking.actividad)}"
+                                   value="#{bundle['actividad.responsable.remove']}" update="actividad_responsables"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton value="#{bundle['actividad.responsables.add']}"
+                             actionListener="#{actividadBacking.agregarResponsables(actividadBacking.actividad)}"
+                             update="messages,actividad_responsables"/>
+
+        </p:panelGrid>
+
+        <p:panelGrid columns="2"  layout="grid">
+            <p:outputLabel value="#{bundle['objetivo']}"/>
             <p:selectOneMenu value="#{actividadBacking.impacto.objetivo}">
-                <f:selectItems value="#{actividadBacking.objetivos}"
+                <f:selectItems value="#{objetivoBacking.all}"
                                var="objetivo" itemLabel="#{objetivo.nombre}"/>
             </p:selectOneMenu>
+
             <p:outputLabel value="#{bundle['impacto.weight']}"/>
             <p:inputText value="#{actividadBacking.impacto.peso}"/>
             <p:commandButton value="#{bundle['impacto.save']}"
                              actionListener="#{actividadBacking.agregarImpacto()}"
                              update="messages,actividad_impactos"/>
+
+            <p:dataTable id="actividad_impactos" value="#{actividadBacking.actividad.impactos}" var="impacto">
+                <p:column headerText="#{bundle['objetivo']}">#{impacto.objetivo.nombre}</p:column>
+                <p:column headerText="#{bundle['impacto.weight']}">#{impacto.peso}</p:column>
+                <p:column>
+                    <p:commandLink actionListener="#{actividadBacking.quitarImpacto(impacto)}"
+                                   value="#{bundle['impacto.remove']}" update="actividad_impactos"/>
+                </p:column>
+            </p:dataTable>
         </p:panelGrid>
 
-        <p:dataTable id="actividad_impactos" value="#{actividadBacking.actividad.impactos}" var="impacto">
-            <p:column headerText="#{bundle['objetivo']}">#{impacto.objetivo.nombre}</p:column>
-            <p:column headerText="#{bundle['impacto.weight']}">#{impacto.peso}</p:column>
-            <p:column>
-                <p:commandLink actionListener="#{actividadBacking.quitarImpacto(impacto)}"
-                               value="#{bundle['impacto.remove']}" update="actividad_impactos"/>
-            </p:column>
-        </p:dataTable>
+
         <p:commandButton value="#{bundle['form.save']}"
                          action="#{actividadBacking.update()}"
                          update="messages"/>
-        <p:button value="#{bundle['form.cancel']}" outcome="#{actividadBacking.urlMap.INDEX_ACTIVIDADES}"/>
+        <p:button value="#{bundle['form.cancel']}" outcome="#{actividadBacking.urlMap.getIndexActividades()}"/>
     </ui:define>
 </ui:composition>

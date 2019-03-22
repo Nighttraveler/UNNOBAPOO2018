@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+
+    <ui:define name="content">
+        <h2>Ingrese los datos de la nuevo Linea Estrategica</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="">
+            <p:outputLabel for="obj-nombre" value="#{bundle['lineaestrategica.name']}"/>
+            <p:inputText id="obj-nombre" value="#{lineaEstrategicaBacking.lineaEstrategica.nombre}"/>
+            <p:outputLabel for="obj-desc" value="#{bundle['lineaestrategica.desc']}"/>
+            <p:inputText id="obj-desc" value="#{lineaEstrategicaBacking.lineaEstrategica.descripcion}"/>
+            <p:commandButton value="#{bundle['form.save']}"
+                             action="#{lineaEstrategicaBacking.create()}"
+                             update="messages"/>
+            <p:button value="#{bundle['form.cancel']}" outcome="#{lineaEstrategicaBacking.urlMap.getIndexLineasEstrategicas()}"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>
+

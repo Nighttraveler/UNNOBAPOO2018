@@ -1,16 +1,23 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    template="./../template.xhtml">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="./../template.xhtml">
     <ui:define name="content">
         <p:dataTable id="users"
                      value="#{userBacking.getAll()}"
             var="user">
+
+            <p:column headerText="#{bundle['usuario.name']}">
+                <h:outputText value="#{user.nombre}"/>
+            </p:column>
             <p:column headerText="#{bundle['usuario.email']}">
                 <h:outputText value="#{user.email}"/>
             </p:column>
+
+            <c:if test="#{sessionBacking.usuario.administrador}">
             <p:column headerText="#{bundle['usuario.password']}">
                 <h:outputText value="#{user.password}"/>
             </p:column>
@@ -28,9 +35,11 @@
                                icon="ui-icon-alert" />
                 </p:commandLink>
             </p:column>
+            </c:if>
         </p:dataTable>
-        <p:button value="Nuevo" outcome="#{userBacking.urlMap.getNewUsuario()}"/>
-
+        <c:if test="#{sessionBacking.usuario.administrador}">
+        <p:button value="#{bundle['form.create']}" outcome="#{userBacking.urlMap.getNewUsuario()}"/>
+        </c:if>
 
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
             <p:commandButton value="#{bundle['form.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

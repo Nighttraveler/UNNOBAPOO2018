@@ -1,11 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+    <ui:define name="head">
+        <f:metadata>
+            <f:viewParam name="id" value="#{convocatoriaBacking.convocatoria}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h2>#{bundle['objetivo.update.header']}</h2>
+        <br />
+        <p:panelGrid columns="1" styleClass="">
+            <p:outputLabel value="#{bundle['convocatoria.name']}"/>
+
+            <p:inputText value="#{convocatoriaBacking.convocatoria.nombre}"/>
+
+            <p:outputLabel value="#{bundle['convocatoria.desc']}"/>
+
+            <p:inputText value="#{convocatoriaBacking.convocatoria.descripcion}"/>
+
+            <p:commandButton value="#{bundle['form.update']}"
+                             action="#{convocatoriaBacking.update()}"
+                             update="messages"/>
+
+            <p:button value="#{bundle['form.cancel']}" outcome="#{convocatoriaBacking.urlMap.getIndexConvocatorias()}"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>

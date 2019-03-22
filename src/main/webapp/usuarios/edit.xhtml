@@ -15,12 +15,19 @@
             <p:panelGrid columns="2" styleClass="">
                 <p:outputLabel value="#{bundle['usuario.email']}"/>
                 <p:inputText value="#{userBacking.user.email}"/>
+
                 <p:outputLabel value="#{bundle['usuario.password']}"/>
-                <p:password value="#{userBacking.user.password}"/>
-                <p:commandButton value="#{bundle['form.update']}"
-                                 action="#{userBacking.update()}" 
-                                 update="messages"/>
-                <p:button value="#{bundle['form.cancel']}" outcome="#{userBacking.urlMap.getIndexUsuarios()}"/>
+                <p:inputText  value="#{userBacking.user.password}"/>
+
+                <p:outputLabel value="#{bundle['usuario.name']}"/>
+                <p:inputText value="#{userBacking.user.nombre}"/>
+
+                <p:selectBooleanCheckbox value="#{userBacking.user.administrador}" itemLabel="#{bundle['usuario.is.admin']}"/>
+
             </p:panelGrid>
+        <p:commandButton value="#{bundle['form.update']}"
+                         action="#{userBacking.update()}"
+                         update="messages"/>
+        <p:button value="#{bundle['form.cancel']}" outcome="#{userBacking.urlMap.getIndexUsuarios()}"/>
     </ui:define>
 </ui:composition>

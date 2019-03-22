@@ -11,23 +11,81 @@
             <h:form>
                 <p:growl id="messages" autoUpdate="true"/>
 
-
                     <p:menubar>
-                        <c:if test="#{sessionBacking.usuario.administrador}">
-                        <p:submenu label="Usuarios">
-                            <p:menuitem  value="Listar" url="#{userBacking.urlMap.getIndexUsuarios()}" />
-                            <p:menuitem  value="Nuevo" url="#{userBacking.urlMap.getNewUsuario()}" />
-                        </p:submenu>
-                        </c:if>
-                        <p:submenu label="#{bundle['objetivos']}">
-                            <p:menuitem value="#{bundle['form.list']}" url="#{objetivoBacking.urlMap.getIndexObjetivos()}"/>
-                            <p:menuitem value="#{bundle['form.create']}" url="#{objetivoBacking.urlMap.getNewObjetivo()}"/>
-                        </p:submenu>
-                        <p:submenu label="#{bundle['actividades']}">
-                            <p:menuitem value="#{bundle['form.list']}" url="#{actividadBacking.urlMap.getIndexActividades()}"/>
-                            <p:menuitem value="#{bundle['form.create']}" url="#{actividadBacking.urlMap.getNewActividad()}"/>
-                        </p:submenu>
-                        <p:submenu styleClass="nav-items" label="#{sessionBacking.usuario.getEmail()}" >
+                        <c:choose>
+                            <c:when test="#{sessionBacking.usuario.administrador}">
+                                <p:submenu label="Usuarios">
+                                    <p:menuitem  value="Listar" url="#{sessionBacking.urlMap.getIndexUsuarios()}" />
+                                    <p:menuitem  value="Nuevo" url="#{sessionBacking.urlMap.getNewUsuario()}" />
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['objetivos']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexObjetivos()}"/>
+                                    <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewObjetivo()}"/>
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['convocatorias']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexConvocatorias()}"/>
+                                    <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewConvocatoria()}"/>
+                                </p:submenu>
+                                <p:submenu label="#{bundle['lineasestrategicas']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexLineasEstrategicas()}"/>
+                                    <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewLineaEstrategica()}"/>
+                                </p:submenu>
+                                <p:submenu label="#{bundle['ambitos']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexAmbitos()}"/>
+                                    <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewAmbito()}"/>
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['actividades']}">
+                                    <p:submenu label="Simples">
+                                        <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexActividades()}"/>
+                                        <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewActividad()}"/>
+                                    </p:submenu>
+                                    <p:submenu label="Compuestas">
+                                        <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexActividadesCompuestas()}"/>
+                                        <p:menuitem value="#{bundle['form.create']}" url="#{sessionBacking.urlMap.getNewActividadCompuesta()}"/>
+                                    </p:submenu>
+                                    <p:menuitem value="#{bundle['form.list.all']}" url="#{sessionBacking.urlMap.getIndexActividadesAll()}" />
+
+                                </p:submenu>
+                            </c:when>
+
+                            <c:otherwise>
+                                <p:submenu label="Usuarios">
+                                    <p:menuitem  value="Listar" url="#{sessionBacking.urlMap.getIndexUsuarios()}" />
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['objetivos']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexObjetivos()}"/>
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['convocatorias']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexConvocatorias()}"/>
+                                </p:submenu>
+                                <p:submenu label="#{bundle['lineasestrategicas']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexLineasEstrategicas()}"/>
+                                </p:submenu>
+                                <p:submenu label="#{bundle['ambitos']}">
+                                    <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexAmbitos()}"/>
+                                </p:submenu>
+
+                                <p:submenu label="#{bundle['actividades']}">
+                                    <p:submenu label="Simples">
+                                        <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexActividades()}"/>
+                                    </p:submenu>
+                                    <p:submenu label="Compuestas">
+                                        <p:menuitem value="#{bundle['form.list']}" url="#{sessionBacking.urlMap.getIndexActividadesCompuestas()}"/>
+                                    </p:submenu>
+                                    <p:menuitem value="#{bundle['form.list.all']}" url="#{sessionBacking.urlMap.getIndexActividadesAll()}" />
+
+                                </p:submenu>
+                            </c:otherwise>
+
+
+                        </c:choose>
+                        <p:submenu styleClass="nav-items" label="#{sessionBacking.usuario.nombre}" >
+                            <p:menuitem  value="#{bundle['welcome.mis.actividades']}" action="#{sessionBacking.urlMap.getWELCOME()}"/>
                             <p:menuitem  value="#{bundle['logout.button.value']}" action="#{sessionBacking.logout()}"/>
                         </p:submenu>
 

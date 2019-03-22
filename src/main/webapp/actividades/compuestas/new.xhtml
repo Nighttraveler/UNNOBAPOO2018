@@ -9,34 +9,29 @@
         <br />
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['actividades.name']}"/>
-            <p:inputText value="#{actividadBacking.actividad.nombre}"/>
+            <p:inputText value="#{actividadCompuestaBacking.actividad.nombre}"/>
         </p:panelGrid>
 
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['actividad.resolucion']}"/>
-            <p:inputText value="#{actividadBacking.actividad.resolucion}"/>
+            <p:inputText value="#{actividadCompuestaBacking.actividad.resolucion}"/>
         </p:panelGrid>
 
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['actividad.expediente']}"/>
-            <p:inputText value="#{actividadBacking.actividad.expediente}"/>
-        </p:panelGrid>
-
-        <p:panelGrid columns="2" layout="grid">
-            <p:outputLabel value="#{bundle['actividades.name']}"/>
-            <p:inputText value="#{actividadBacking.actividad.nombre}"/>
+            <p:inputText value="#{actividadCompuestaBacking.actividad.expediente}"/>
         </p:panelGrid>
 
         <p:panelGrid columns="4" layout="grid">
             <p:outputLabel value="#{bundle['actividad.fechainicio']}" />
-            <p:calendar value="#{actividadBacking.actividad.fechaInicio}" />
+            <p:calendar value="#{actividadCompuestaBacking.actividad.fechaInicio}" />
             <p:outputLabel value="#{bundle['actividad.fechafin']}" />
-            <p:calendar value="#{actividadBacking.actividad.fechaFin}"  />
+            <p:calendar value="#{actividadCompuestaBacking.actividad.fechaFin}"  />
         </p:panelGrid>
 
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['convocatoria']}"/>
-            <p:selectOneMenu value="#{actividadBacking.actividad.convocatoria}">
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadCompuestaBacking.actividad.convocatoria}">
                 <f:selectItems value="#{convocatoriaBacking.all}"
                  var="convocatoria" itemLabel="#{convocatoria.nombre}"/>
             </p:selectOneMenu>
@@ -44,7 +39,7 @@
 
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['lineaestrategica']}"/>
-            <p:selectOneMenu value="#{actividadBacking.actividad.linea}">
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadCompuestaBacking.actividad.linea}">
                 <f:selectItems value="#{lineaEstrategicaBacking.all}"
                                var="linea" itemLabel="#{linea.nombre}"/>
             </p:selectOneMenu>
@@ -52,7 +47,7 @@
 
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel value="#{bundle['ambito']}"/>
-            <p:selectOneMenu value="#{actividadBacking.actividad.ambito}">
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{actividadCompuestaBacking.actividad.ambito}">
                 <f:selectItems value="#{ambitoBacking.all}"
                                var="ambito" itemLabel="#{ambito.nombre}"/>
             </p:selectOneMenu>
@@ -61,57 +56,58 @@
 
         <p:panelGrid columns="3" layout="grid">
 
-            <p:outputLabel for="usuarios_list" value="#{bundle['usuario']}"/>
+            <p:outputLabel for="usuarios_list" value="#{bundle['actividad.responsables.form']}"/>
 
-            <p:selectManyMenu  scrollHeight="400" id="usuarios_list" style="width: 95%;" value="#{actividadBacking.responsablesIds}"
-                              filter="true" filterMatchMode="contains" showCheckbox="true">
+            <p:selectManyMenu  scrollHeight="400" id="usuarios_list" style="width: 95%;" value="#{actividadCompuestaBacking.responsablesIds}"
+                               filter="true" filterMatchMode="contains" showCheckbox="true">
                 <f:selectItems value="#{userBacking.all}"
                                var="user" itemLabel="#{user.email}" itemValue="#{user.id}"/>
             </p:selectManyMenu>
 
-            <p:dataTable scrollHeight="400" id="actividad_responsables" value="#{actividadBacking.actividad.responsables}" var="user">
+            <p:dataTable scrollHeight="400" id="actividad_responsables" value="#{actividadCompuestaBacking.actividad.responsables}" var="user">
                 <p:column headerText="#{bundle['actividad.responsables']}">#{user.email}</p:column>
                 <p:column>
-                    <p:commandLink actionListener="#{actividadBacking.quitarResponsable(user)}"
+                    <p:commandLink actionListener="#{actividadCompuestaBacking.quitarResponsable(user, actividadCompuestaBacking.actividad)}"
                                    value="#{bundle['actividad.responsable.remove']}" update="actividad_responsables"/>
                 </p:column>
             </p:dataTable>
 
             <p:commandButton value="#{bundle['actividad.responsables.add']}"
-                             actionListener="#{actividadBacking.agregarResponsables()}"
+                             actionListener="#{actividadCompuestaBacking.agregarResponsables(actividadCompuestaBacking.actividad)}"
                              update="messages,actividad_responsables"/>
 
         </p:panelGrid>
 
-        <p:panelGrid columns="3"  layout="grid">
-            <p:outputLabel value="#{bundle['objetivo']}"/>
-            <p:selectOneMenu value="#{actividadBacking.impacto.objetivo}">
-                <f:selectItems value="#{objetivoBacking.all}"
-                               var="objetivo" itemLabel="#{objetivo.nombre}"/>
-            </p:selectOneMenu>
+        <p:panelGrid columns="3" layout="grid">
 
-            <p:outputLabel value="#{bundle['impacto.weight']}"/>
-            <p:inputText value="#{actividadBacking.impacto.peso}"/>
-            <p:commandButton value="#{bundle['impacto.save']}"
-                             actionListener="#{actividadBacking.agregarImpacto()}"
-                             update="messages,actividad_impactos"/>
+            <p:outputLabel for="actividades_list" value="#{bundle['actividad.actividades.form']}"/>
 
-            <p:dataTable id="actividad_impactos" value="#{actividadBacking.actividad.impactos}" var="impacto">
-                <p:column headerText="#{bundle['objetivo']}">#{impacto.objetivo.nombre}</p:column>
-                <p:column headerText="#{bundle['impacto.weight']}">#{impacto.peso}</p:column>
+            <p:selectManyMenu  scrollHeight="400" id="actividades_list" style="width: 95%;" value="#{actividadCompuestaBacking.actividadesIds}"
+                               filter="true" filterMatchMode="contains" showCheckbox="true">
+                <f:selectItems value="#{actividadCompuestaBacking.all}"
+                               var="actividad" itemLabel="#{actividad.nombre}" itemValue="#{actividad.id}"/>
+            </p:selectManyMenu>
+
+            <p:dataTable id="actividad_actividades" value="#{actividadCompuestaBacking.actividad.actividades}" var="actividad">
+                <p:column headerText="#{bundle['actividades']}">#{actividad.nombre}</p:column>
                 <p:column>
-                    <p:commandLink actionListener="#{actividadBacking.quitarImpacto(impacto)}"
-                                   value="#{bundle['impacto.remove']}" update="actividad_impactos"/>
+                    <p:commandLink actionListener="#{actividadCompuestaBacking.quitarActividad(actividad)}"
+                                   value="#{bundle['actividad.actividades.remove']}" update="actividad_actividades"/>
                 </p:column>
             </p:dataTable>
+
+            <p:commandButton value="#{bundle['actividad.actividades.add']}"
+                             actionListener="#{actividadCompuestaBacking.agregarActividades()}"
+                             update="messages,actividad_actividades"/>
+
         </p:panelGrid>
 
 
 
         <p:commandButton value="#{bundle['form.save']}"
-                         action="#{actividadBacking.create()}"
+                         action="#{actividadCompuestaBacking.create()}"
                          update="messages"/>
-        <p:button value="#{bundle['form.cancel']}" outcome="#{actividadBacking.urlMap.getIndexActividades()}"/>
+        <p:button value="#{bundle['form.cancel']}" outcome="#{actividadCompuestaBacking.urlMap.getIndexActividadesCompuestas()}"/>
     </ui:define>
 </ui:composition>
 
