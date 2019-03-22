@@ -1,7 +1,6 @@
 package ar.edu.unnoba.poo2018.manager;
 
-import ar.edu.unnoba.poo2018.model.AbstractActividad;
-import ar.edu.unnoba.poo2018.model.Objetivo;
+import ar.edu.unnoba.poo2018.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -12,14 +11,22 @@ public interface ActividadManager {
 
     AbstractActividad obtenerActividad( AbstractActividad actividad);
 
+    AbstractActividad obtenerActividadById( Long id);
+
     void actualizarActividad(AbstractActividad actividad);
 
     void borrarActividad(AbstractActividad actividad);
 
     List<AbstractActividad> obtenerActividades();
 
-    Map<Objetivo, Integer> getPeso(AbstractActividad actividad);
+    List<ActividadSimple> obtenerActividadesSimples();
 
-    Map<Objetivo, Integer> getPeso(AbstractActividad actividad,Objetivo objetivo);
+    List<ActividadCompuesta> obtenerActividadesCompuestas();
+
+    Map<Objetivo, Double> getPeso(AbstractActividad actividad);
+
+    Map<Objetivo, Double> getPeso(List<Impacto> impactos);
+
+    Map<Objetivo, Double> getPeso(AbstractActividad actividad,Objetivo objetivo);
 
 }
