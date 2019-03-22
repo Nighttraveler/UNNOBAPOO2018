@@ -8,8 +8,8 @@ import java.util.Map;
 
 public interface ObjetivoPesoStrategy {
 
-   Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos);
+   Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, int pesoTotal);
 
-   Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos, Objetivo objetivo);
+   Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, Objetivo objetivo);
 
 }

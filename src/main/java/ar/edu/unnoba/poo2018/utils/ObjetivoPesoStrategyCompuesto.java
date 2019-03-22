@@ -12,34 +12,33 @@ import java.util.Map;
 public class ObjetivoPesoStrategyCompuesto implements ObjetivoPesoStrategy {
 
     @Override
-    public Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos) {
-        HashMap<Objetivo, Integer> asd = new HashMap<>();
+    public Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, int pesototal) {
+        HashMap<Objetivo, Double> asd = new HashMap<>();
 
-        Integer pesos = 0;
+        int pesos = 0;
 
         for (Impacto impacto: impactos){
                pesos += impacto.getPeso();
         }
         Objetivo o = impactos.get(0).getObjetivo();
-        asd.put(o, pesos/ impactos.size());
+        asd.put(o,  (double) pesos/ pesototal);
         return asd;
 
     }
 
     @Override
-    public Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos, Objetivo objetivo) {
-        HashMap<Objetivo, Integer> asd = new HashMap<>();
+    public Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, Objetivo objetivo) {
+        HashMap<Objetivo, Double> asd = new HashMap<>();
 
-        Integer pesos = 0;
+        int pesos = 0;
 
         for (Impacto impacto: impactos){
             if (impacto.getObjetivo() == objetivo){
                 pesos += impacto.getPeso();
             }
         }
-
         Objetivo o = impactos.get(0).getObjetivo();
-        asd.put(o, pesos);
+        asd.put(o, (double) pesos);
         return asd;
 
     }

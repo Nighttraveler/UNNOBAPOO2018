@@ -13,11 +13,11 @@ public class ObjetivoPesoStrategySimple implements ObjetivoPesoStrategy {
 
 
     @Override
-    public Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos) {
-        HashMap<Objetivo,Integer> objetivoPeso =  new HashMap<>();
+    public Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, int pesototal) {
+        HashMap<Objetivo,Double> objetivoPeso =  new HashMap<>();
 
         for (Impacto impacto : impactos){
-            objetivoPeso.put(impacto.getObjetivo(), impacto.getPeso());
+            objetivoPeso.put(impacto.getObjetivo(),(double) impacto.getPeso());
 
         }
 
@@ -25,12 +25,12 @@ public class ObjetivoPesoStrategySimple implements ObjetivoPesoStrategy {
     }
 
     @Override
-    public Map<Objetivo, Integer> calcularPeso(List<Impacto> impactos, Objetivo objetivo) {
-        HashMap<Objetivo,Integer> objetivoPeso =  new HashMap<>();
+    public Map<Objetivo, Double> calcularPeso(List<Impacto> impactos, Objetivo objetivo) {
+        HashMap<Objetivo,Double> objetivoPeso =  new HashMap<>();
 
         for (Impacto impacto: impactos){
             if (impacto.getObjetivo() == objetivo){
-                objetivoPeso.put(objetivo, impacto.getPeso());
+                objetivoPeso.put(objetivo, (double) impacto.getPeso());
             }
         }
         return objetivoPeso;
