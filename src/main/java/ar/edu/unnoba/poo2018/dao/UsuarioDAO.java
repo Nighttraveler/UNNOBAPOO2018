@@ -29,7 +29,12 @@ public class UsuarioDAO extends AbstractDAO<Usuario>{
     }
 
     public List getAllUsers(){
+        return getAll();
+    }
+
+    @Override
+    protected List<Usuario> getAll() {
         Query query =  em.createNamedQuery("Usuario.getAll");
-            return   query.getResultList();
+        return   query.getResultList();
     }
 }

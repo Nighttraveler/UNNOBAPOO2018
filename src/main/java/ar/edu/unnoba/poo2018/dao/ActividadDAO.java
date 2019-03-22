@@ -18,6 +18,11 @@ public class ActividadDAO extends AbstractDAO<AbstractActividad> {
     }
 
     public List<AbstractActividad> getAllActividades(){
+        return getAll();
+    }
+
+    @Override
+    protected List<AbstractActividad> getAll() {
         Query query = em.createNamedQuery("actividad.getAll");
         return query.getResultList();
     }

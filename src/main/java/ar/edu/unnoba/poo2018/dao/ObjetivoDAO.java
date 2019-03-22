@@ -14,6 +14,11 @@ public class ObjetivoDAO extends AbstractDAO<Objetivo> {
     }
 
     public List getAllobjetivos(){
+        return getAll();
+    }
+
+    @Override
+    protected List<Objetivo> getAll() {
         Query query =  em.createNamedQuery("Objetivo.getAll");
         return query.getResultList();
     }
