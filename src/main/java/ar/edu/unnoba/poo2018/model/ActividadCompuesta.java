@@ -1,18 +1,17 @@
 package ar.edu.unnoba.poo2018.model;
 
-import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
-import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategyCompuesto;
-
 import javax.persistence.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity()
 @DiscriminatorValue("Actividad_Compuesta")
+@NamedQueries({
+		@NamedQuery(name = "actividad.getAllCompuestas",
+				query = "Select a From ActividadCompuesta a order by a.nombre")
+})
 public class ActividadCompuesta extends AbstractActividad{
 
-
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.DETACH)
 	@JoinTable(name = "actividades_relacionadas",
 			joinColumns = @JoinColumn(name = "actividad_compuesta_id"),
 			inverseJoinColumns = @JoinColumn(name = "actividad_id")
@@ -44,6 +43,10 @@ public class ActividadCompuesta extends AbstractActividad{
 
 	public List<AbstractActividad> getActividades(){
 		return actividades;
+	}
+
+	public void setActividades(List<AbstractActividad> actividades) {
+		this.actividades = actividades;
 	}
 
 	@Override

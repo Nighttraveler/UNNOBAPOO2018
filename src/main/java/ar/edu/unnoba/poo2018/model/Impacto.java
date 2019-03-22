@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Impactos")
+@NamedQueries(
+		@NamedQuery(
+				name = "Impacto.getAll",
+				query = "select i from Impacto i")
+)
 public class Impacto extends AbstractEntity{
 
 	@ManyToOne
@@ -40,6 +45,22 @@ public class Impacto extends AbstractEntity{
 	}
 	public void setObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null) {
+			return false;
+		} else if (!(obj instanceof AbstractEntity)) {
+			return false;
+		}else if (obj instanceof Impacto){
+			return ((Impacto) obj).getObjetivo() == this.getObjetivo() && ((Impacto) obj).getPeso() == this.getPeso();
+		}
+		else if ( ((AbstractEntity) obj).getId() == null ){
+			return false;
+		}
+		else return ((AbstractEntity) obj).getId().equals(this.getId());
 	}
 	
 }

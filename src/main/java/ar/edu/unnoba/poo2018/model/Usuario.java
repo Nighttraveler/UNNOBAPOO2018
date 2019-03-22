@@ -1,6 +1,8 @@
 package ar.edu.unnoba.poo2018.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuarios")
@@ -28,16 +30,25 @@ public class Usuario extends AbstractEntity {
     @Column(name = "email")
     private String email;
 
+	@ManyToMany
+	@JoinTable(name = "actividad_usuario",
+			joinColumns = @JoinColumn(name = "usuario_id"),
+			inverseJoinColumns= @JoinColumn(name = "actividad_id")
+	)
+	private List<AbstractActividad> actividades = new ArrayList<>();
+
     public Usuario(){
 
 	}
 
-	public Usuario(String nombre, String password, boolean administrador) {
+	public Usuario(String nombre, String password, boolean administrador, String email) {
 		this.nombre = nombre;
 
 	    this.password = password;
 
 		this.administrador = administrador;
+
+		this.email = email;
 	}
 
 	public String getNombre() {
@@ -70,5 +81,13 @@ public class Usuario extends AbstractEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<AbstractActividad> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(List<AbstractActividad> actividades) {
+		this.actividades = actividades;
 	}
 }

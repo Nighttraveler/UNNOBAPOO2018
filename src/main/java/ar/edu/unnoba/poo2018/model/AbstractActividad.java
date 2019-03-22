@@ -1,19 +1,17 @@
 package ar.edu.unnoba.poo2018.model;
 
-import ar.edu.unnoba.poo2018.utils.ObjetivoPesoStrategy;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 @Entity
 @Table(name = "Actividades")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@CascadeOnDelete
 @DiscriminatorColumn(name = "Actividad_Tipo", discriminatorType = DiscriminatorType.STRING)
 @NamedQueries({
 		@NamedQuery(name = "actividad.getAll",
@@ -22,7 +20,7 @@ import java.util.Map;
 public abstract class AbstractActividad extends AbstractEntity {
 
     // ---------------------------------------------- Atributos
-
+	@NotNull
 	private String nombre;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -131,7 +129,10 @@ public abstract class AbstractActividad extends AbstractEntity {
 	public List<Usuario> getResponsables(){
 		return responsables;
 	}
-	
+	public void setResponsables(List<Usuario> responsables) {
+		this.responsables = responsables;
+	}
+
 	public abstract List<Impacto> getImpactos();
 
 }

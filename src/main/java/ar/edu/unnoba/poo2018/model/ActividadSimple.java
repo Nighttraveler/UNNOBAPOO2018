@@ -7,6 +7,10 @@ import java.util.*;
 
 @Entity()
 @DiscriminatorValue("Actividad_Simple")
+@NamedQueries({
+        @NamedQuery(name = "actividad.getAllSimples",
+                query = "Select a From ActividadSimple a order by a.nombre")
+})
 public class ActividadSimple extends AbstractActividad {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -44,17 +48,6 @@ public class ActividadSimple extends AbstractActividad {
     public void setImpactos(List<Impacto> impactos) {
         this.impactos = impactos;
     }
-
-	/*
-
-	public Map<Objetivo, Integer> getPeso(){
-        return objetivoPesoStrategy.calcularPeso(this.impactos);
-    }
-
-    @Override
-    public Map<Objetivo, Integer> getPeso(Objetivo objetivo) {
-        return objetivoPesoStrategy.calcularPeso(this.impactos, objetivo);
-    }*/
 
 
 }

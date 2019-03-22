@@ -1,10 +1,17 @@
 package ar.edu.unnoba.poo2018.model;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Ambitos")
+@NamedQueries(
+		@NamedQuery(
+				name = "Ambito.getAll",
+				query = "select a from Ambito a")
+)
 public class Ambito extends AbstractEntity {
 
 	private String nombre;
